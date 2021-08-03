@@ -3,9 +3,9 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-          <div class="content___about my-5 text-left">
+          <div class="content___about my-5 text-left mt-10 mt-md-0">
             <v-row>
-              <v-col cols="4" sm="2" md="1">
+              <v-col cols="2" sm="2" md="1">
                 <v-badge offset-x="12" offset-y="12" bottom bordered dot>
                   <v-avatar color="blue">
                     <img
@@ -21,9 +21,9 @@
                   Tuyến Đặng
                 </h2>
               </v-col>
-              <v-col class="text-no-wrap" cols="5" sm="3"> </v-col>
-              <v-col class="text-right">
-                <v-btn class="mx-2" fab dark small color="pink">
+              <v-col class="hidden-xs-only" cols="5" md="5"> </v-col>
+              <v-col class="text-right d-flex align-center justify-end">
+                <v-btn class="mx-2" fab dark small color="pink" @click="addCount">
                   <v-icon dark>
                     mdi-heart
                   </v-icon>
@@ -49,7 +49,8 @@
               </v-col>
             </v-row>
             <v-row justify="center">
-              <v-col cols="8">
+              <v-col cols="11" md="8">
+               
                 <v-text-field
                   outlined
                   label="Bạn muốn tìm gì?"
@@ -82,7 +83,25 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   name: "NavAbout",
+
+  created() {
+    this.getPost();
+    this.items = this.newsList.map((news) => {
+      return news.title;
+    });
+  
+  },
+  computed: {
+    ...mapState("newsList", ["newsList"]),
+    
+  },
+  methods: {
+    ...mapActions("newsList", ["getPost"]),
+    ...mapActions("notifi", ["addCount"]),
+  },
+  
 };
 </script>

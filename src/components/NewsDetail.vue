@@ -1,6 +1,11 @@
 <template>
-  <div class="news___about py-7">
-    <v-container>
+  <div class="news___about ">
+    <v-overlay :opacity="1" :value="overlay">
+      <v-progress-circular indeterminate size="64">
+        
+      </v-progress-circular>
+    </v-overlay>
+    <v-container class="py-7">
       <v-row justify="center">
         <v-col cols="12">
           <div class="ListNews">
@@ -49,7 +54,7 @@
                 class="pa-0 text-capitalize"
               >
                 <v-row class="white--text mb-4">
-                  <v-col cols="1">
+                  <v-col cols="3" md="1">
                     <div class="d-flex justify-center ">
                       <v-badge
                         dot
@@ -60,14 +65,13 @@
                         color="warning"
                       >
                         <v-avatar color="primary">
-                        G
-                      </v-avatar>
-                        </v-badge>  
-                      
+                          G
+                        </v-avatar>
+                      </v-badge>
                     </div>
                   </v-col>
-                  <v-col cols="11" class="text-left">
-                    <p class="name_cmt mb-2 d-flex align-center">
+                  <v-col cols="9" md="11" class="text-left">
+                    <p class="name_cmt mb-2 d-flex align-center flex-wrap">
                       {{ cmt.name }} -
                       <i>July 15, 2021 - </i>
                       <v-rating
@@ -77,7 +81,10 @@
                         small
                       ></v-rating>
                     </p>
-                    <div class="content_cmt">{{ cmt.body }}</div>
+                    <div class="hidden-xs-only content_cmt">{{ cmt.body }}</div>
+                  </v-col>
+                  <v-col cols="12 hidden-md-only hidden-sm-only content_cmt text-left ">
+                      {{ cmt.body }}
                   </v-col>
                 </v-row>
               </v-list-item>
@@ -100,6 +107,8 @@ export default {
       nullprev: false,
       nullnext: false,
       rating: 4,
+      progress: 0,
+      overlay: true,
     };
   },
   watch: {
@@ -109,22 +118,28 @@ export default {
       },
       deep: true,
     },
+    checkLoad: function(val){
+ 
+      this.overlay = val
+    }
   },
   created() {
     this.changeID(this.$route.params.id);
   },
+  destroyed(){
+    this.resetData();
+  },
   computed: {
-    ...mapState("newsList", ["Post", "newsList", "Comment"]),
+    ...mapState("newsList", ["Post", "newsList", "Comment", "checkLoad"]),
   },
   methods: {
-    ...mapActions("newsList", ["detailPost", "getPost"]),
+    ...mapActions("newsList", ["detailPost", "getPost", "resetData"]),
     changeID: function(id) {
       this.detailPost(id);
       this.next = parseInt(id) + 1;
       this.prev = parseInt(id) - 1;
       this.nullprev = this.prev <= 0 ? true : false;
       this.nullnext = this.next > 10 ? true : false;
-      console.log(this.nullnext);
     },
   },
 };

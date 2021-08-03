@@ -4,23 +4,26 @@
     <div class="news___about py-7">
       <v-container>
         <v-row>
-          <v-col cols="9">
+          <v-col cols="12" md="9">
               <ListNews />
           </v-col>
-          <v-col col3="3"></v-col>
+          <v-col col="12" md="3"></v-col>
         </v-row>
       </v-container>
     </div>
+    <Footer/>
   </div>
 </template>
 <script>
 import ListNews from '../components/ListNews.vue'
 import NavAbout from '../components/NavAbout.vue'
+import Footer from '../components/Footer.vue'
 export default {
   name:'about',
   components:{
     ListNews,
-    NavAbout
+    NavAbout,
+    Footer
   }
 }
 </script>

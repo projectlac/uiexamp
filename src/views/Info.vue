@@ -1,8 +1,7 @@
 <template>
   <v-sheet>
     <NavAbout />
-    
-    <NewsDetail />
+    <Infor />
     <Footer/>
   </v-sheet>
 </template>
@@ -10,13 +9,13 @@
 <script>
 // @ is an alias to /src
 import NavAbout from "../components/NavAbout.vue";
-import NewsDetail from "../components/NewsDetail.vue";
+import Infor from "../components/Infor.vue";
 import Footer from '../components/Footer.vue'
 export default {
-  name: "Detail",
+  name: "Info",
   components: {
-    NewsDetail,
     NavAbout,
+    Infor,
     Footer
   },
   computed: {},

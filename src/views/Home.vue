@@ -3,7 +3,7 @@
     
     <div class="img-bg">
       <div class="content___img">
-        <h1 class="text-h1 text-capitalize font-weight-bold ">UI example</h1>
+        <h1 class="text-h3 text-md-h1 text-capitalize font-weight-bold ">UI example</h1>
         <p class="subtitle-2">
           It is a long established fact that a reader will be distracted by the
           readable content of a page when looking at its layout. The point of
